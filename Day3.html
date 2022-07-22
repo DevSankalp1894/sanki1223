@@ -7,101 +7,117 @@
     <title>Document</title>
     <style>
         #container{
-           
-            width:30%;
-            margin:auto;
-            height:500px;
-        
-            margin-top:150px;
-            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-         
-            
+              width:30%;
+              height:600px;
+              margin:auto;
+              
+              margin-top:70px;
         }
-        input{
-              margin-top:25px;
-              padding:20px 20px;
-              display:grid;
+        #head>img{
+              width:30%;
+              height40px;
+              margin-left:180px;
+        }
+        h3{
+            margin-left:140px;
+        }
+        #body{
               width:90%;
-            
-              font-weight:bold;
+              height:450px;
+              margin:auto;
+              box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
         }
-        #get{
-            
-            background-color: blue;
-          
-        }
-        .class1{
-             border-radius: 40px;
-             width:90%;
-             text-align:center;
-             
-               
-        }
-       
         p{
-            margin:20px 170px;
+            font-size:15px;
             font-weight:bold;
+            margin:15px 20px;
         }
-        #container>h1{
-            text-align:center;
-            margin-top:10px;
+       form> input{
+            width:90%;
+            height:40px;
+            border-radius:10px;
+            margin-left:20px;
         }
-    #email{
-          
-           border:1px solid teal;
+        #submit{
+            background-color: blue;
+           color:white;
+           font-size:15px;
+           font-weight:bold;
+        }
+        .s{
+            color:red;
         }
      
-        form>#get::placeholder{
-            color:aliceblue;
-        }
-        #id1{
-            width:80%;
-            height:auto;
-            margin:auto;
-        }
-     
-      
-        
-
     </style>
 </head>
 <body>
     <div id="container">
-        <h1>Get started today</h1>
-        <div id="id1">
-   <form  >
-    <input type="email" id="email" placeholder="Enter your email" >
-    <input class="class1" type="submit " id="get" placeholder = "Get started" >
-    <p>OR</p>
-    <input class="class1" type="text " id="google" placeholder="Sign up with Google">
-    <input class="class1" type="text" id="micro" placeholder="Sign up with Microsoft">
-   </form>
-</div>
-</div>
+        <div id="head">
+            <img src="https://assets.calendly.com/packs/authentication/media/logo-f885ef95906ef15bb6fb.png" alt="">
+            <h3>Sign up with Calendly for free</h3>     
+        </div>
+        <div id="body">
+            <form>
+          <p>Enter your email to get started.</p>
+          <input id="email" type="email" >
+          <p>Enter your full name.</p>
+          <input id="name" type="text" placeholder="Sankalp">
+          <p>Choose a password with at least 8 characters.</p>
+          <input id="pass" type="password" placeholder="password">
+          <p class="s">.Use a few words, avoid common phrases</p>
+          <p class="s" >.No need for symbols, digits, or uppercase letters</p>
+          <input id="submit" type="submit" value="continue">
+        </form>
+        </div>
+    </div>
 </body>
 <script>
-    let arr=JSON.parse(localStorage.getItem('signin'))||[];
-     for(let i=0;i<arr.length;i++){
-    document.querySelector("#email").value=arr[i].email;
+        let arr=JSON.parse(localStorage.getItem('signin'))||[];
+      let obj=JSON.parse(localStorage.getItem("login"));
+        for(let i=0;i<arr.length;i++){
+        document.querySelector("#email").value=arr[i].email;
+    }
+    for(let key in obj){
+  document.querySelector("#name").value=obj.name;
+  document.querySelector("#pass").value=obj.password;
+    }
+
+  
+    document.querySelector("form").addEventListener("submit",myfunction)
+    function myfunction(){
+        event.preventDefault();
+    let name=document.querySelector("#name").value;
+    let password=document.querySelector("#pass").value;
+    for (let i=0;i<arr.length;i++){
+    let obj={
+          email:arr[i].email,
+          name:name,
+          password:password
+
+    }
    
-    }
-     
-     document.querySelector("#get").addEventListener("click",myfunction);
-     function myfunction(event){
-            event.preventDefault();
-            let email=document.querySelector("#email").value;
-         let obj={
-               email:email
-         }  
-         if(obj.email==""){
-            alert("Please enter email");
-         }
-         else{
-         arr.push(obj); 
-         localStorage.setItem("signin" ,JSON.stringify(arr));
-     }
-    }
+  
+  
     
-      
+    
+    }
+    let flag=false;
+    for(let key in obj){
+    
+    if((obj.name=="")&& (obj.password=="")){
+        flag=true;
+        alert("Fill input credential");
+
+    }
+}
+   if(flag==false){
+    localStorage.setItem("login",JSON.stringify(obj));
+    alert("check your email");
+    
+}
+    
+
+    }
+   
 </script>
 </html>
