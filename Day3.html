@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+              width:30%;
+              height:600px;
+              margin:auto;
+              
+              margin-top:70px;
+        }
+        #head>img{
+              width:30%;
+              height40px;
+              margin-left:180px;
+        }
+        h3{
+            margin-left:140px;
+        }
+        #body{
+              width:90%;
+              height:450px;
+              margin:auto;
+              box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+        p{
+            font-size:15px;
+            font-weight:bold;
+            margin:15px 20px;
+        }
+       form> input{
+            width:90%;
+            height:40px;
+            border-radius:10px;
+            margin-left:20px;
+        }
+        #submit{
+            background-color: blue;
+           color:white;
+           font-size:15px;
+           font-weight:bold;
+        }
+        .s{
+            color:red;
+        }
+     
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="head">
+            <img src="https://assets.calendly.com/packs/authentication/media/logo-f885ef95906ef15bb6fb.png" alt="">
+            <h3>Sign up with Calendly for free</h3>     
+        </div>
+        <div id="body">
+            <form>
+          <p>Enter your email to get started.</p>
+          <input id="email" type="email" >
+          <p>Enter your full name.</p>
+          <input id="name" type="text" placeholder="Sankalp">
+          <p>Choose a password with at least 8 characters.</p>
+          <input id="pass" type="password" placeholder="password">
+          <p class="s">.Use a few words, avoid common phrases</p>
+          <p class="s" >.No need for symbols, digits, or uppercase letters</p>
+          <input id="submit" type="submit" value="continue">
+        </form>
+        </div>
+    </div>
+</body>
+<script>
+        let arr=JSON.parse(localStorage.getItem('signin'))||[];
+      let obj=JSON.parse(localStorage.getItem("login"));
+        for(let i=0;i<arr.length;i++){
+        document.querySelector("#email").value=arr[i].email;
+    }
+    for(let key in obj){
+  document.querySelector("#name").value=obj.name;
+  document.querySelector("#pass").value=obj.password;
+    }
+
+  
+    document.querySelector("form").addEventListener("submit",myfunction)
+    function myfunction(){
+        event.preventDefault();
+    let name=document.querySelector("#name").value;
+    let password=document.querySelector("#pass").value;
+    for (let i=0;i<arr.length;i++){
+    let obj={
+          email:arr[i].email,
+          name:name,
+          password:password
+
+    }
+   
+  
+  
+    
+    
+    }
+    let flag=false;
+    for(let key in obj){
+    
+    if((obj.name=="")&& (obj.password=="")){
+        flag=true;
+        alert("Fill input credential");
+
+    }
+}
+   if(flag==false){
+    localStorage.setItem("login",JSON.stringify(obj));
+    alert("check your email");
+    
+}
+    
+
+    }
+   
+</script>
+</html>
